@@ -1,0 +1,54 @@
+<html>
+
+<head>
+    <title>People/Edit</title>
+</head>
+
+<body>
+@extends('layouts.helloapp')
+
+@section('title', 'Person.Edit')
+
+@section('menubar')
+<a href="/person"><button>ホーム</button></a>
+<a href="/person/find"><button>ID検索</button></a>
+<a href="/person/add"><button>新規登録</button></a>
+<a href="/person/delindex/"><button>削除</button></a>
+   @parent
+   内容を修正してください
+
+
+@endsection
+
+@section('content')
+   @if (count($errors) > 0)
+   <div>
+       <ul>
+           @foreach ($errors->all() as $error)
+               <li>{{ $error }}</li>
+           @endforeach
+       </ul>
+   </div>
+   @endif
+   <form action="/person/edit" method="post">
+   <table>
+       @csrf
+       <input type="hidden" name="id" value="{{$form->id}}">
+       <tr><th>name: </th><td><input type="text" name="name"
+           value="{{$form->name}}"></td></tr>
+       <tr><th>mail: </th><td><input type="text" name="mail"
+           value="{{$form->mail}}"></td></tr>
+       <tr><th>age: </th><td><input type="number" name="age"
+           value="{{$form->age}}"></td></tr>
+       <tr><th></th><td><input type="submit"
+           value="修正する"></td></tr>
+   </table>
+   </form>
+@endsection
+
+@section('footer')
+    copyright 2023 kumagoroh.
+@endsection
+</body>
+
+</html>
